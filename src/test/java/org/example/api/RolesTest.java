@@ -94,7 +94,5 @@ public class RolesTest extends BaseApiTest {
                 .body(Matchers.containsString("You do not have enough permissions to edit project with id: "
                         + firstTestData.getProject().getId()));
 
-//        softy.assertThat(buildConfig.getId())
-//                .isEqualTo(testData.getBuildType().getId());
     }
 }
