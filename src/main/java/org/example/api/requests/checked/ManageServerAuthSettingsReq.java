@@ -35,7 +35,7 @@ public class ManageServerAuthSettingsReq extends Request {
         if (!authenticationSettings.isPerProjectPermissions()) {
             authenticationSettings.setPerProjectPermissions(true);
             putPermissionsTrue(authenticationSettings);
-            getPermissionsTrue();
+            authenticationSettings = getPermissionsTrue();
         }
         return authenticationSettings;
     }

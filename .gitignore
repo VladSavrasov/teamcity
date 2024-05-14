@@ -12,3 +12,4 @@ target/
 *.iml
 *.ipr
 BuildConfigurationTest.http
+allure-results
