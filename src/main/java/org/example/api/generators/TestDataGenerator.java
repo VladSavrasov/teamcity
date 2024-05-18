@@ -24,8 +24,8 @@ public class TestDataGenerator {
                 .parentProject(Project.builder()
                         .locator("_Root")
                         .build())
-                .name(RandomData.getString())
-                .id(RandomData.getString())
+                .name(RandomData.getRandomStringForIdsAndNames())
+                .id(RandomData.getRandomStringForIdsAndNames())
                 .copyAllAssociatedSettings(true)
                 .build();
         var builType = BuildType.builder()

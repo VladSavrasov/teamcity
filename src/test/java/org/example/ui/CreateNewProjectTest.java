@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Condition.text;
 
 public class CreateNewProjectTest extends BaseUiTest {
     @Test
-    public void autorizedUserShouldBeAbleCreateNewProject() throws InterruptedException {
+    public void autorizedUserShouldBeAbleCreateNewProject() {
         var testData = testDataStorage.addTestData();
         var url = "https://github.com/AlexPshe/spring-core-for-qa";
         loginAsUser(testData.getUser());

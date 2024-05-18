@@ -38,4 +38,7 @@ public abstract class Page {
         collection.forEach(webElement -> elements.add(creator.apply(webElement)));
         return elements;
     }
+    protected void waitUntilElementIsLoaded(SelenideElement element) {
+        element.shouldBe(visible, Duration.ofSeconds(30));
+    }
 }
