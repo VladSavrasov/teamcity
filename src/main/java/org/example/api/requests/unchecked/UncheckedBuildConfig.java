@@ -8,7 +8,7 @@ import org.example.api.requests.Request;
 import static io.restassured.RestAssured.given;
 
 public class UncheckedBuildConfig extends Request implements CRUDinterface {
-    private static final String BUILD_CONFIG_ENDPOINT = "/app/rest/buildTypes";
+    private static final String BUILD_CONFIG_ENDPOINT = "/app/rest/buildTypes/";
 
     public UncheckedBuildConfig(RequestSpecification spec) {
         super(spec);
@@ -22,8 +22,10 @@ public class UncheckedBuildConfig extends Request implements CRUDinterface {
     }
 
     @Override
-    public Object get(String id) {
-        return null;
+    public Response get(String name) {
+        return given()
+                .spec(spec)
+                .get(BUILD_CONFIG_ENDPOINT + name);
     }
 
     @Override
@@ -34,6 +36,6 @@ public class UncheckedBuildConfig extends Request implements CRUDinterface {
     @Override
     public Response delete(String id) {
         return given().spec(spec)
-                .delete(BUILD_CONFIG_ENDPOINT + "/id:" + id);
+                .delete(BUILD_CONFIG_ENDPOINT + "id:" + id);
     }
 }

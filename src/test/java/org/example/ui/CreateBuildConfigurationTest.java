@@ -1,6 +1,7 @@
 package org.example.ui;
 
 import lombok.var;
+import org.example.api.requests.checked.CheckedBuildConfig;
 import org.example.api.requests.checked.CheckedProject;
 import org.example.api.spec.Specifications;
 import org.example.ui.pages.admin.CreateBuildConfiguration;
@@ -15,9 +16,9 @@ public class CreateBuildConfigurationTest extends BaseUiTest {
         var url = "https://github.com/AlexPshe/spring-core-for-qa";
         loginAsUser(testData.getUser());
 
-        var project = new CheckedProject(Specifications.getSpec().
-                auhSpec(testData.getUser())).
-                create(testData.getProject());
+        var project = new CheckedProject(Specifications.getSpec()
+                .auhSpec(testData.getUser()))
+                .create(testData.getProject());
 
         new CreateBuildConfiguration()
                 .open(project.getId())
@@ -25,5 +26,12 @@ public class CreateBuildConfigurationTest extends BaseUiTest {
                         testData.getUser().getPassword())
                 .setupBuildConfiguration(testData.getBuildType().getName())
                 .successMessage.shouldHave(text(testData.getBuildType().getName()));
+
+        var buildConfig = new CheckedBuildConfig(Specifications.getSpec()
+                .auhSpec(testData.getUser()))
+                .get(testData.getBuildType().getName());
+
+        softy.assertThat(project.getId())
+                .isEqualTo(buildConfig.getProject().getId());
     }
 }

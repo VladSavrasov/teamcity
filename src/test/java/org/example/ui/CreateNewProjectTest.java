@@ -1,6 +1,8 @@
 package org.example.ui;
 
 import lombok.var;
+import org.example.api.requests.checked.CheckedProject;
+import org.example.api.spec.Specifications;
 import org.example.ui.pages.favorite.ProjectsPage;
 import org.example.ui.pages.admin.CreateNewProject;
 import org.testng.annotations.Test;
@@ -22,5 +24,9 @@ public class CreateNewProjectTest extends BaseUiTest {
                 .getSubProjects()
                 .stream().reduce((first, second) -> second).get()
                 .getHeader().shouldHave(text(testData.getProject().getName()));
+
+        new CheckedProject(Specifications.getSpec()
+                .auhSpec(testData.getUser()))
+                .get(testData.getProject().getId());
     }
 }
