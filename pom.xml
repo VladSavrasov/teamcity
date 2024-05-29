@@ -14,8 +14,9 @@
         <aspectj.version>1.9.19</aspectj.version>
         <allure.version>2.24.0</allure.version>
         <rest-assured.version>5.1.1</rest-assured.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+        <suiteApiXml>src/main/resources/testng-suites/api-suite.xml</suiteApiXml>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>io.qameta.allure</groupId>
@@ -74,6 +75,24 @@
             <version>7.0.4</version>
         </dependency>
     </dependencies>
-
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteApiXml}</suiteXmlFile>
+                        <suiteXmlFile>src/main/resources/testng-suites/ui-suite.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

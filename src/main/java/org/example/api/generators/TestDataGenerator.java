@@ -1,7 +1,11 @@
 package org.example.api.generators;
 
-import lombok.var;
-import org.example.api.models.*;
+import org.example.api.models.BuildType;
+import org.example.api.models.NewProjectDescription;
+import org.example.api.models.Project;
+import org.example.api.models.Role;
+import org.example.api.models.Roles;
+import org.example.api.models.User;
 
 import java.util.Arrays;
 
@@ -19,7 +23,7 @@ public class TestDataGenerator {
                         .build())
                 .build();
 
-        var projectDesctiption = NewProjectDescription
+        NewProjectDescription projectDesctiption = NewProjectDescription
                 .builder()
                 .parentProject(Project.builder()
                         .locator("_Root")
@@ -28,7 +32,7 @@ public class TestDataGenerator {
                 .id(RandomData.getRandomStringForIdsAndNames())
                 .copyAllAssociatedSettings(true)
                 .build();
-        var builType = BuildType.builder()
+        BuildType builType = BuildType.builder()
                 .id(RandomData.getString())
                 .name(RandomData.getString())
                 .project(projectDesctiption)

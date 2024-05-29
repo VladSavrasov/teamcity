@@ -1,8 +1,8 @@
 package org.example.api.generators;
 
+import io.restassured.specification.RequestSpecification;
 import lombok.Builder;
 import lombok.Data;
-import lombok.var;
 import org.example.api.models.BuildType;
 import org.example.api.models.NewProjectDescription;
 import org.example.api.models.User;
@@ -18,7 +18,7 @@ public class TestData {
     private BuildType buildType;
 
     public void delete(){
-        var spec = Specifications.getSpec().superUserSpec();
+        RequestSpecification spec = Specifications.getSpec().superUserSpec();
         new UncheckedProject(spec).delete(project.getId());
         new UncheckedUser(spec).delete(user.getUsername());
     }

@@ -106,19 +106,20 @@ echo $properties_content
 
 echo "Run system tests"
 echo "Run API tests"
-mvn test -DsuiteXmlFile=testng-suites/api-suite.xml
-echo "Run UI tests"
-mvn test -DsuiteXmlFile=testng-suites/ui-suite.xml
+mvn clean test -DsuiteXmlFile="testng-suites/api-suite.xml"
 
-#cd $workdir
-#
-#echo "Start teamcity agent"
-#
-#cd $teamcity_agent_workdir
-#
-#docker run --name $teamcity_agent_container_name -e SERVER_URL=$http$ip":8111" -v $pwd/conf:/data/teamcity_agent/conf jetbrains/teamcity-agent
-#
-#echo "Teamcity agent is running..."
+echo "Run UI tests"
+mvn test -DsuiteXmlFile="testng-suites/ui-suite.xml"
+
+cd $workdir
+
+echo "Start teamcity agent"
+
+cd $teamcity_agent_workdir
+
+docker run -d --name $teamcity_agent_container_name -e SERVER_URL=$http$ip":8111" -v $pwd/conf:/data/teamcity_agent/conf jetbrains/teamcity-agent
+
+echo "Teamcity agent is running..."
 
 foreach ($container in $container_names)
 {

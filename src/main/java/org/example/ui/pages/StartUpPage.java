@@ -30,6 +30,7 @@ public class StartUpPage extends Page {
         waitUntilElementIsLoaded(proceedButton);
         proceedButton.click();
         waitUntilPageIsLoaded();
+        waitUntilElementIsLoaded(proceedButton);
         proceedButton.click();
         waitUntilPageIsLoaded();
         acceptLicense.shouldBe(Condition.enabled, Duration.ofMinutes(5));

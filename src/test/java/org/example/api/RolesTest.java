@@ -1,9 +1,11 @@
 package org.example.api;
 
-import lombok.var;
 import org.apache.http.HttpStatus;
 import org.example.api.enums.Role;
+import org.example.api.generators.TestData;
 import org.example.api.generators.TestDataGenerator;
+import org.example.api.models.BuildType;
+import org.example.api.models.Project;
 import org.example.api.requests.UncheckedRequests;
 import org.example.api.requests.checked.CheckedBuildConfig;
 import org.example.api.requests.checked.CheckedProject;
@@ -12,9 +14,9 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 public class RolesTest extends BaseApiTest {
-    @Test
+    @Test(groups = "sistemtests")
     public void unautorizedUserShouldNotHaveRightToCreateProject() {
-        var testData = testDataStorage.addTestData();
+        TestData testData = testDataStorage.addTestData();
 
         new UncheckedRequests(Specifications.getSpec().unauthSpec()).getProjectRequest()
                 .create(testData.getProject())
@@ -27,15 +29,15 @@ public class RolesTest extends BaseApiTest {
                 .body(Matchers.containsString("No project found by locator 'count:1,id:" + testData.getProject().getId() + "'"));
 
     }
-    @Test
+    @Test(groups = "sistemtests")
     public void systemAdminShouldHaveRightToCreateProject (){
-        var testData = testDataStorage.addTestData();
+        TestData testData = testDataStorage.addTestData();
 
         testData.getUser().setRoles(TestDataGenerator.generateRoles(Role.SYSTEM_ADMIN,"g"));
 
         checkedWithSuperUser.getUserRequest().create(testData.getUser());
 
-        var project = new CheckedProject(Specifications.getSpec().
+        Project project = new CheckedProject(Specifications.getSpec().
                 auhSpec(testData.getUser())).
                 create(testData.getProject());
 
@@ -43,9 +45,9 @@ public class RolesTest extends BaseApiTest {
                 .isEqualTo(testData.getProject().getId());
     }
 
-    @Test
+    @Test(groups = "sistemtests")
     public void projectAdminTestShouldHaveRightToCreateBuildConfigToHisProject(){
-        var testData = testDataStorage.addTestData();
+        TestData testData = testDataStorage.addTestData();
 
         checkedWithSuperUser.getProjectRequest()
                         .create(testData.getProject());
@@ -57,7 +59,7 @@ public class RolesTest extends BaseApiTest {
         checkedWithSuperUser.getUserRequest()
                 .create(testData.getUser());
 
-        var buildConfig = new CheckedBuildConfig(Specifications.getSpec()
+        BuildType buildConfig = new CheckedBuildConfig(Specifications.getSpec()
                 .auhSpec(testData.getUser()))
                 .create(testData.getBuildType());
 
@@ -65,13 +67,13 @@ public class RolesTest extends BaseApiTest {
                 .isEqualTo(testData.getBuildType().getId());
     }
 
-    @Test
+    @Test(groups = "sistemtests")
     public void projectAdminTestShouldNotHaveRightToCreateBuildConfigToAnotherProject(){
 
-        var firstTestData = testDataStorage.addTestData();
-        var secondTestData = testDataStorage.addTestData();
+        TestData firstTestData = testDataStorage.addTestData();
+        TestData secondTestData = testDataStorage.addTestData();
 
-        var secondUserRequest = new UncheckedRequests(Specifications.getSpec().auhSpec(secondTestData.getUser()));
+        UncheckedRequests secondUserRequest = new UncheckedRequests(Specifications.getSpec().auhSpec(secondTestData.getUser()));
 
         checkedWithSuperUser.getProjectRequest().create(firstTestData.getProject());
         checkedWithSuperUser.getProjectRequest().create(secondTestData.getProject());

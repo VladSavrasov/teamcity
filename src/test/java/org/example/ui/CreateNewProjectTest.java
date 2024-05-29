@@ -1,19 +1,19 @@
 package org.example.ui;
 
-import lombok.var;
+import org.example.api.generators.TestData;
 import org.example.api.requests.checked.CheckedProject;
 import org.example.api.spec.Specifications;
-import org.example.ui.pages.favorite.ProjectsPage;
 import org.example.ui.pages.admin.CreateNewProject;
+import org.example.ui.pages.favorite.ProjectsPage;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.text;
 
 public class CreateNewProjectTest extends BaseUiTest {
-    @Test
+    @Test(groups = "sistemtests")
     public void autorizedUserShouldBeAbleCreateNewProject() {
-        var testData = testDataStorage.addTestData();
-        var url = "https://github.com/AlexPshe/spring-core-for-qa";
+        TestData testData = testDataStorage.addTestData();
+        String url = "https://github.com/AlexPshe/spring-core-for-qa";
         loginAsUser(testData.getUser());
         new CreateNewProject()
                 .open(testData.getProject().getParentProject().getLocator())
