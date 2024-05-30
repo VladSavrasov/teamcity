@@ -9,8 +9,8 @@ import org.example.api.requests.checked.ManageServerAuthSettingsReq;
 import org.example.api.spec.Specifications;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
     protected SoftAssertions softy;
@@ -33,7 +33,7 @@ public class BaseTest {
 
 
 
-    @BeforeSuite
+    @BeforeGroups("sistemtests")
     public void checkPermissionsTrueTest() {
         ManageServerAuthSettingsReq manageServerAuthSettingsReq = new ManageServerAuthSettingsReq(Specifications.getSpec().superUserSpec());
         ServerAuthSettings authenticationSettings = manageServerAuthSettingsReq.checkPermissions();

@@ -1,5 +1,6 @@
 package org.example.api.generators;
 
+
 import lombok.var;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class TestDataStorage {
     }
 
     public TestData addTestData(){
-        var testData = TestDataGenerator.generate();
+        TestData testData = TestDataGenerator.generate();
         addTestData(testData);
         return testData;
     }

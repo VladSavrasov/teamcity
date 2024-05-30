@@ -1,19 +1,19 @@
 package org.example.api;
 
-import lombok.var;
 import org.apache.http.HttpStatus;
 import org.example.api.generators.DataProvidersForParametrizedTests;
 import org.example.api.generators.RandomData;
+import org.example.api.generators.TestData;
 import org.example.api.models.Project;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 public class ProjectValidationTest extends BaseApiTest {
 
-    @Test(dataProvider = "nums",dataProviderClass = DataProvidersForParametrizedTests.class)
+    @Test(groups = "sistemtests",dataProvider = "nums",dataProviderClass = DataProvidersForParametrizedTests.class)
     public void projectNameShouldBeEqualTo255Chars(int count) {
 
-        var testData = testDataStorage.addTestData();
+        TestData testData = testDataStorage.addTestData();
 
         testData.getProject().setName(RandomData.getStringOfSomeChar(count));
 
@@ -25,10 +25,10 @@ public class ProjectValidationTest extends BaseApiTest {
                 .isEqualTo(testData.getProject().getName());
     }
 
-    @Test(dataProvider = "badNums",dataProviderClass = DataProvidersForParametrizedTests.class)
+    @Test(groups = "sistemtests",dataProvider = "badNums",dataProviderClass = DataProvidersForParametrizedTests.class)
     public void projectNameShouldNotBeMoreThanTo255Chars(int count) {
 
-        var testData = testDataStorage.addTestData();
+        TestData testData = testDataStorage.addTestData();
 
         testData.getProject().setName(RandomData.getStringOfSomeChar(count));
 
@@ -37,13 +37,13 @@ public class ProjectValidationTest extends BaseApiTest {
                 .then().assertThat().statusCode(HttpStatus.SC_BAD_REQUEST);
     }
 
-    @Test()
+    @Test(groups = "sistemtests")
     public void shouldNotCreateProjectsWithTheSameId() {
 
-        var firstTestData = testDataStorage.addTestData();
-        var secondTestData = testDataStorage.addTestData();
+        TestData firstTestData = testDataStorage.addTestData();
+        TestData secondTestData = testDataStorage.addTestData();
 
-        var firstId = firstTestData.getProject().getId();
+        String firstId = firstTestData.getProject().getId();
                 secondTestData.getProject().setId(firstId);
 
         uncheckedWithSuperUser.getProjectRequest()
@@ -56,13 +56,13 @@ public class ProjectValidationTest extends BaseApiTest {
                 .body(Matchers.containsString("Project ID \""+ firstId + "\" is already used by another project"));
     }
 
-    @Test()
+    @Test(groups = "sistemtests")
     public void shouldNotCreateProjectsWithTheSameName() {
 
-        var firstTestData = testDataStorage.addTestData();
-        var secondTestData = testDataStorage.addTestData();
+        TestData firstTestData = testDataStorage.addTestData();
+        TestData secondTestData = testDataStorage.addTestData();
 
-        var firstName = firstTestData.getProject().getName();
+        String firstName = firstTestData.getProject().getName();
         secondTestData.getProject().setName(firstName);
 
         uncheckedWithSuperUser.getProjectRequest()

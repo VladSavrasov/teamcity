@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="API Suite" verbose="3" parallel="none">
+    <test name="API Test" preserve-order="true" >
+        <classes>
+            <class name="org.example.api.BuildConfigurationTest"/>
+        </classes>
+    </test>
+</suite>

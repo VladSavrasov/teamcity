@@ -13,3 +13,4 @@ target/
 *.ipr
 BuildConfigurationTest.http
 allure-results
+teamcity_tests_infrastructure

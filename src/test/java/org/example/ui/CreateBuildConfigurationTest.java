@@ -1,6 +1,8 @@
 package org.example.ui;
 
-import lombok.var;
+import org.example.api.generators.TestData;
+import org.example.api.models.BuildType;
+import org.example.api.models.Project;
 import org.example.api.requests.checked.CheckedBuildConfig;
 import org.example.api.requests.checked.CheckedProject;
 import org.example.api.spec.Specifications;
@@ -10,13 +12,13 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Condition.text;
 
 public class CreateBuildConfigurationTest extends BaseUiTest {
-    @Test
+    @Test(groups = "sistemtests")
     public void autorizedUserShouldBeAbleCreateNewBuildConfiguration() {
-        var testData = testDataStorage.addTestData();
-        var url = "https://github.com/AlexPshe/spring-core-for-qa";
+        TestData testData = testDataStorage.addTestData();
+        String url = "https://github.com/AlexPshe/spring-core-for-qa";
         loginAsUser(testData.getUser());
 
-        var project = new CheckedProject(Specifications.getSpec()
+        Project project = new CheckedProject(Specifications.getSpec()
                 .auhSpec(testData.getUser()))
                 .create(testData.getProject());
 
@@ -27,7 +29,7 @@ public class CreateBuildConfigurationTest extends BaseUiTest {
                 .setupBuildConfiguration(testData.getBuildType().getName())
                 .successMessage.shouldHave(text(testData.getBuildType().getName()));
 
-        var buildConfig = new CheckedBuildConfig(Specifications.getSpec()
+        BuildType buildConfig = new CheckedBuildConfig(Specifications.getSpec()
                 .auhSpec(testData.getUser()))
                 .get(testData.getBuildType().getName());
 

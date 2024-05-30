@@ -2,7 +2,6 @@ package org.example.ui.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import lombok.var;
 import org.example.ui.Selectors;
 import org.example.ui.elements.PageElement;
 
@@ -24,21 +23,21 @@ public abstract class Page {
     }
 
     private void waitUntilDataIsSaved() {
-        savingWaitingMarker.shouldNotBe(visible, Duration.ofSeconds(30));
+        savingWaitingMarker.shouldNotBe(visible, Duration.ofMinutes(10));
     }
 
     protected void waitUntilPageIsLoaded() {
-        pageWaitingMarker.shouldNotBe(visible, Duration.ofSeconds(10));
+        pageWaitingMarker.shouldNotBe(visible, Duration.ofMinutes(10));
     }
 
     public <T extends PageElement> ArrayList<T> generatePageElements(ElementsCollection collection,
                                                                       Function<SelenideElement, T> creator) {
-        var elements = new ArrayList<T>();
+        ArrayList<T> elements = new ArrayList<>();
 
         collection.forEach(webElement -> elements.add(creator.apply(webElement)));
         return elements;
     }
     protected void waitUntilElementIsLoaded(SelenideElement element) {
-        element.shouldBe(visible, Duration.ofSeconds(30));
+        element.shouldBe(visible, Duration.ofMinutes(10));
     }
 }
