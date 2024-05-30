@@ -120,6 +120,10 @@ cd $teamcity_agent_workdir
 docker run -d --name $teamcity_agent_container_name -e SERVER_URL=$http$ip":8111" -v $pwd/conf:/data/teamcity_agent/conf jetbrains/teamcity-agent
 
 echo "Teamcity agent is running..."
+cd ..
+cd ..
+echo "Teamcity agent Tests is running..."
+mvn clean test -Dtest=AutirizeAgentTest#autorizeAgentTest
 
 foreach ($container in $container_names)
 {
