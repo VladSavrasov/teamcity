@@ -48,18 +48,17 @@ jobs:
           -v $(pwd)/logs:/opt/teamcity/logs \
           -p 8111:8111 jetbrains/teamcity-server:2024.03 
 
+      - name: Pull Selenoid images
+        run: |
+          docker pull selenoid/vnc_chrome:91.0
+          docker pull selenoid/vnc_firefox:89.0
+          docker pull selenoid/vnc_opera:76.0
 
       - name: Set up Selenoid server
         run: |
-          docker run -d --name selenoid -p 4444:4444 \
-          -v /var/run/docker.sock:/var/run/docker.sock \
-          -v $(pwd):/etc/selenoid/:ro aerokube/selenoid:latest-release 
-
-      - name: Pull Selenoid images
-        run: |
-          docker pull selenoid/vnc_chrome:119.0
-          docker pull selenoid/vnc:firefox_91.0
-          docker pull selenoid/vnc:opera_76.0
+          echo "current =$(pwd | sed -e 's/U/u/g' | sed -e 's/V/v/g' | sed -e 's/A/a/g' | sed -e 's/P/p/g')" >> $GITHUB_ENV
+          echo $current
+          docker run -d --name selenoid -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v $current/config/:/etc/selenoid/:ro aerokube/selenoid:latest-release 
 
       - name: Run Selenoid UI
         run: |
