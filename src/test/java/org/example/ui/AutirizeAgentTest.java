@@ -5,7 +5,6 @@ import org.example.ui.pages.agents.UnautorizedPage;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.sleep;
 
 public class AutirizeAgentTest extends BaseUiTest {
     @Test(groups = "sistemtests")
