@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -33,10 +33,10 @@ jobs:
 #          echo $(pwd)/config/
 #          cp $(pwd)/infra/browsers.json $(pwd)/config/
 #          ls
-          
+
 
       - name: Set up host config property
-        run: | 
+        run: |
          echo "host=$HOST:8111" >> src/main/resources/config.properties
          echo "remote=http://$HOST:4444/wd/hub" >> src/main/resources/config.properties
 
@@ -46,7 +46,7 @@ jobs:
           docker run -u 0 -d --name teamcity-server \
           -v $(pwd)/tmp/teamcity_server/datadir:/data/teamcity_server/datadir \
           -v $(pwd)/logs:/opt/teamcity/logs \
-          -p 8111:8111 jetbrains/teamcity-server:2024.03 
+          -p 8111:8111 jetbrains/teamcity-server:2024.03
 
       - name: Pull Selenoid images
         run: |
@@ -55,7 +55,7 @@ jobs:
           docker pull selenoid/vnc_opera:76.0
 
       - name: Set up Selenoid server
-        run: docker run --name selenoid -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v $GITHUB_WORKSPACE/config/:/etc/selenoid/ф aerokube/selenoid:latest-release
+        run: docker run -d --name selenoid -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/config/:/etc/selenoid/ aerokube/selenoid:latest-release
 
 #      - name: Run Selenoid UI
 #        run: |
