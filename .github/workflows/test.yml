@@ -55,14 +55,11 @@ jobs:
           docker pull selenoid/vnc_opera:76.0
 
       - name: Set up Selenoid server
-        run: |
-          echo "current =$(pwd | sed -e 's/U/u/g' | sed -e 's/V/v/g' | sed -e 's/A/a/g' | sed -e 's/P/p/g')" >> $GITHUB_ENV
-          echo $current
-          docker run -d --name selenoid -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v $current/config/:/etc/selenoid/:ro aerokube/selenoid:latest-release 
+        run: docker run --name selenoid -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v $GITHUB_WORKSPACE/config/:/etc/selenoid/ф aerokube/selenoid:latest-release
 
-      - name: Run Selenoid UI
-        run: |
-          docker run -d --name selenoid-ui -p 8080:8080 aerokube/selenoid-ui --selenoid-uri http://$HOST:4444
+#      - name: Run Selenoid UI
+#        run: |
+#          docker run -d --name selenoid-ui -p 8080:8080 aerokube/selenoid-ui --selenoid-uri http://$HOST:4444
 
       - name: Set up teamcity server tests
         run: mvn clean test -Dtest=SetupFirstStartTest#setupTeamCityServerTest
