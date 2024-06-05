@@ -51,28 +51,24 @@ jobs:
       - name: Pull Selenoid images
         run: |
           docker pull selenoid/vnc_chrome:91.0
-          docker pull selenoid/vnc_firefox:89.0
+          docker pull selenoid/vnc:firefox_89.0 
           docker pull selenoid/vnc_opera:76.0
           docker pull aerokube/selenoid:latest-release
 
       - name: make directory
         run: |
           echo "CURRENT=$(pwd | sed -e 's/U/u/g' | sed -e 's/V/v/g' | sed -e 's/A/a/g' | sed -e 's/P/p/g')" >> $GITHUB_ENV
-          mkdir selenoid
-          cd selenoid
           mkdir config
           echo $(pwd)
           ls
 
       - name: Copy file
         run: |
-          cp $(pwd)/infra/browsers.json $(pwd)/selenoid/config/
+          cp $(pwd)/infra/browsers.json $(pwd)/config/
           ls
 
       - name: Set up Selenoid server
-        run: |
-          docker run -d --name selenoid -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v /mnt/c/Users/Vladivikovich/AquaProjects/qaworkshop/selenoid/config/:/etc/selenoid/:ro aerokube/selenoid:latest-release
-          ls
+        run: docker run -d --name selenoid -p 4444:4444 -v /var/run/docker.sock:/var/run/docker.sock -v $(pwd)/config/:/etc/selenoid/ aerokube/selenoid:latest-release
 
 #      - name: Run Selenoid UI
 #        run: |
