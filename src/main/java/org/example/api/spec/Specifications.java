@@ -26,6 +26,7 @@ public class Specifications {
         requestBuilder.setBaseUri(("http://" + Config.getProperty("host")));
         requestBuilder.addFilter(new RequestLoggingFilter());
         requestBuilder.addFilter(new ResponseLoggingFilter());
+        requestBuilder.addFilter(new SwaggerCoverageRestAssured());
         requestBuilder.setContentType(ContentType.JSON);
         requestBuilder.setAccept(ContentType.JSON);
         return requestBuilder;
