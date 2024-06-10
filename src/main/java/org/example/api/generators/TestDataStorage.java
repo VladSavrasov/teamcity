@@ -1,7 +1,7 @@
 package org.example.api.generators;
 
 
-import lombok.var;
+import io.qameta.allure.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class TestDataStorage {
         }
         return testDataStorage;
     }
-
+   @Step("create Testdata")
     public TestData addTestData(){
         TestData testData = TestDataGenerator.generate();
         addTestData(testData);

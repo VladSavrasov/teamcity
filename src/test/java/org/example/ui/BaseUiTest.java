@@ -1,6 +1,7 @@
 package org.example.ui;
 
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.Step;
 import org.example.api.BaseTest;
 import org.example.api.config.Config;
 import org.example.api.models.User;
@@ -21,6 +22,7 @@ public class BaseUiTest extends BaseTest {
         Configuration.remoteConnectionTimeout = 600000;
         Configuration.timeout = 180000;
     }
+    @Step("login as user")
     public void loginAsUser(User user){
         new CheckedUser(Specifications.getSpec().superUserSpec())
                 .create(user);
