@@ -98,4 +98,4 @@ jobs:
         run: mvn clean test -DsuiteXmlFile="testng-suites/api-suite.xml"
 
       - name: Run UI tests
-        run: mvnac test -DsuiteXmlFile="testng-suites/ui-suite.xml"
+        run: mvn test -DsuiteXmlFile="testng-suites/ui-suite.xml"
