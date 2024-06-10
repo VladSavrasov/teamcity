@@ -126,7 +126,9 @@ jobs:
 
       - name: Run Swagger coverage
         if: always()
-        run: .swagger-coverage-commandline/bin/swagger-coverage-commandline -s http://$HOST:8111/app/rest/swagger.json -i target/swagger-coverage-output
+        run: |
+         wget https://github.com/viclovsky/swagger-coverage/releases/download/{latest-swagger-coverage-version}/swagger-coverage-{latest-swagger-coverage-version}.zip
+         unzip swagger-coverage-commandline-{latest-swagger-coverage-version}.zip
 
       - name: Save Swagger coverage
         uses: actions/upload-artifact@v4
