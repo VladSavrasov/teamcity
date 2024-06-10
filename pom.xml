@@ -16,6 +16,7 @@
         <rest-assured.version>5.1.1</rest-assured.version>
         <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
         <suiteApiXml>src/main/resources/testng-suites/api-suite.xml</suiteApiXml>
+        <latest-swagger-coverage-version>1.5.0</latest-swagger-coverage-version>
     </properties>
     <dependencies>
         <dependency>
