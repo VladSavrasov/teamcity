@@ -1,0 +1,1 @@
+[{"uid":"7259df0db1e4fba7","name":"startUpTest","time":{"start":1718040390649,"stop":1718040445812,"duration":55163},"status":"passed","severity":"normal"},{"uid":"67cc8b163035abbb","name":"autorizeAgentTest","time":{"start":1718040503171,"stop":1718040504117,"duration":946},"status":"broken","severity":"normal"}]
