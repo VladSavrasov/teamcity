@@ -147,12 +147,33 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
-#      - name: Publish swagger coverage
-#        uses: peaceiris/actions-gh-pages@v3
-#        if: always()
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          publish_branch: gh-pages
-#          publish_path: |
-#            ./swagger-coverage-report.html
-#            ./swagger-coverage-results.json
+      - name: check swagger report
+        uses: peaceiris/actions-gh-pages@v3
+        id: check_swagger_report
+        run: |
+           git clone https://github.com/VladSavrasov/teamcity.git gh-pages-clone
+           cd gh-pages-clone
+           if [ -d "swagger-coverage" ]; then
+            echo "::set-output name=exists::true"
+           else
+            echo "::set-output name=exists::false"
+           fi
+            rm -rf gh-pages-clone
+           echo "fold=swagger-coverage" >> $GITHUB_ENV
+
+      - name: Create unique folder name based on current date and time
+        if: steps.check_swagger_report.outputs.exists == 'true'
+        run: |
+          echo "NOW=$(date +"%Y-%m-%d_%H-%M-%S")" >> $GITHUB_ENV
+          echo "fold=swagger-coverage-$NOW" >> $GITHUB_ENV
+
+      - name: Add HTML file to new folder
+        run: |
+          mkdir $fold
+          echo "./swagger-coverage-report.html" > $fold/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         publish_dir: ./$fold
