@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
 class AuthModule {
     private String name;
     private Properties properties;

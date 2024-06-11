@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     private String username;
     private String password;
