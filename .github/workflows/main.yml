@@ -120,8 +120,8 @@ jobs:
         with:
          name: swagger-coverage
          path: |
-           ./swagger-coverage-output/swagger-coverage-report.html
-           ./swagger-coverage-output/swagger-coverage-results.json
+           ./swagger-coverage-report.html
+           ./swagger-coverage-results.json
 
       - name: Load test report history
         uses: actions/checkout@v3
