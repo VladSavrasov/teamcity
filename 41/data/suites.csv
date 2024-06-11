@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Jun 11 16:14:54 GMT 2024","Tue Jun 11 16:15:09 GMT 2024","15337","UI Suite","UI Test","org.example.ui.CreateBuildConfigurationTest","org.example.ui.CreateBuildConfigurationTest","autorizedUserShouldBeAbleCreateNewBuildConfiguration","autorizedUserShouldBeAbleCreateNewBuildConfiguration",""
+"passed","Tue Jun 11 16:11:42 GMT 2024","Tue Jun 11 16:12:40 GMT 2024","57990","Surefire suite","Surefire test","org.example.ui.SetupTest","org.example.ui.SetupTest","startUpTest","startUpTest",""
+"passed","Tue Jun 11 16:13:31 GMT 2024","Tue Jun 11 16:14:02 GMT 2024","30099","Surefire suite","Surefire test","org.example.ui.AutirizeAgentTest","org.example.ui.AutirizeAgentTest","autorizeAgentTest","autorizeAgentTest",""
+"passed","Tue Jun 11 16:14:53 GMT 2024","Tue Jun 11 16:14:54 GMT 2024","795","API Suite","API Test","org.example.api.BuildConfigurationTest","org.example.api.BuildConfigurationTest","buildConfigurationTest","buildConfigurationTest",""
