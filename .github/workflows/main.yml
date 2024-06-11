@@ -142,5 +142,5 @@ jobs:
         with:
          name: swagger-coverage
          path: |
-           ./target/swagger-coverage-output/swagger-coverage-report.html
-           ./target/swagger-coverage-output/swagger-coverage-results.json
+           swagger-coverage-report.html
+           swagger-coverage-results.json
