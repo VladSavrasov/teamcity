@@ -100,10 +100,10 @@ jobs:
       - name: Run UI tests
         run: mvn clean test -DsuiteXmlFile="testng-suites/ui-suite.xml"
 
-      - name: Make a directory
-        run: |
-          cd target/
-          mkdir swagger
+#      - name: Make a directory
+#        run: |
+#          cd target/
+#          mkdir swagger
 
       - name: Run Swagger coverage
         if: always()
@@ -111,7 +111,7 @@ jobs:
           wget https://github.com/viclovsky/swagger-coverage/releases/download/1.5.0/swagger-coverage-1.5.0.zip
           unzip swagger-coverage-1.5.0.zip 
           ls
-          ./swagger-coverage-commandline-1.5.0/bin/swagger-coverage-commandline -s http://$HOST:8111/app/rest/swagger.json -i ./target/swagger/swagger-coverage-output
+          ./swagger-coverage-commandline-1.5.0/bin/swagger-coverage-commandline -s http://$HOST:8111/app/rest/swagger.json -i ./swagger-coverage-output
           ls
 
       - name: Save Swagger coverage
@@ -120,8 +120,8 @@ jobs:
         with:
          name: swagger-coverage
          path: |
-           ./target/swagger/swagger-coverage-report.html
-           ./target/swagger/swagger-coverage-results.json
+           ./swagger-coverage-report.html
+           ./swagger-coverage-results.json
 
       - name: Load test report history
         uses: actions/checkout@v3
@@ -153,4 +153,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: swagger
+          publish_path: |
+            ./swagger-coverage-report.html
+            ./swagger-coverage-results.json
