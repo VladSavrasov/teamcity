@@ -169,10 +169,11 @@ jobs:
       - name: Add HTML file to new folder
         run: |
           mkdir $fold
-          echo "./swagger-coverage-report.html" > $fold/index.html
+          echo "./swagger-coverage-report.html" > ./$fold/index.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
          github_token: ${{ secrets.GITHUB_TOKEN }}
+         publish_branch: gh-pages
          publish_dir: ./$fold
