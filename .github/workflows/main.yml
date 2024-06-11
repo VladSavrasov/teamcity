@@ -124,7 +124,7 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
-      - name: make directory
+      - name: Make a directory
         run: |
           cd target/
           mkdir swagger-coverage-output
