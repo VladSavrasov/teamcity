@@ -98,12 +98,12 @@ jobs:
         run: mvn clean test -DsuiteXmlFile="testng-suites/api-suite.xml"
 
       - name: Run UI tests
-        run: mvn test -DsuiteXmlFile="testng-suites/ui-suite.xml"
+        run: mvn clean test -DsuiteXmlFile="testng-suites/ui-suite.xml"
 
-      - name: Make a directory
-        run: |
-          cd target/
-          mkdir swagger-coverage-output
+#      - name: Make a directory
+#        run: |
+#          cd target/
+#          mkdir swagger-coverage-output
 
       - name: Run Swagger coverage
         if: always()
