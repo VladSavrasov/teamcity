@@ -147,7 +147,7 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
-      - name: Publish  swagger coverage
+      - name: Publish swagger coverage
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
