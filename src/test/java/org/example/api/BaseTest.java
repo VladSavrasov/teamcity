@@ -33,7 +33,6 @@ public class BaseTest {
     }
 
 
-
     @BeforeSuite
     public void checkPermissionsTrueTest() {
         ManageServerAuthSettingsReq manageServerAuthSettingsReq = new ManageServerAuthSettingsReq(Specifications.getSpec().superUserSpec());
