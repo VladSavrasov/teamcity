@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeSuite;
 
 public class BaseTest {
     protected SoftAssertions softy;
+
     public TestDataStorage testDataStorage;
     public CheckedRequests checkedWithSuperUser = new CheckedRequests(Specifications.getSpec().superUserSpec());
     public UncheckedRequests uncheckedWithSuperUser = new UncheckedRequests(Specifications.getSpec().superUserSpec());
@@ -39,5 +40,4 @@ public class BaseTest {
         ServerAuthSettings authenticationSettings = manageServerAuthSettingsReq.checkPermissions();
         Assert.assertTrue(authenticationSettings.isPerProjectPermissions());
     }
-
 }
