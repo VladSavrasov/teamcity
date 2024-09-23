@@ -38,4 +38,7 @@ public class UncheckedBuildConfig extends Request implements CRUDinterface {
         return given().spec(spec)
                 .delete(BUILD_CONFIG_ENDPOINT + "id:" + id);
     }
+    public Response getSth(String s){
+     return given().spec(spec) .get(BUILD_CONFIG_ENDPOINT+s);
+    }
 }
